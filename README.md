@@ -8,9 +8,9 @@ A neural network is composed of multiple neurons, where each neuron processes an
 
 ### Equation for a Single Neuron:
 
-\[
+```math
     z = \sum_{i=1}^{n} w_i x_i + b
-\]
+```
 
 Where:
 - \( x_i \) = input features.
@@ -20,9 +20,9 @@ Where:
 
 The output of the neuron is passed through an **activation function** \( f(z) \):
 
-\[
+```math
     a = f(z)
-\]
+```
 
 ### Example Activation Functions:
 1. **Sigmoid**: \( f(z) = \frac{1}{1 + e^{-z}} \)
@@ -56,9 +56,9 @@ Activation functions introduce non-linearity into the model, enabling the neural
 
 For a layer of neurons, the forward pass equation is expressed as:
 
-\[
+```math
     \mathbf{Z} = \mathbf{W} \mathbf{X} + \mathbf{b}
-\]
+```
 
 Where:
 - \( \mathbf{X} \in \mathbb{R}^{n \times m} \) = input matrix (\( n \) features, \( m \) samples).
@@ -68,9 +68,9 @@ Where:
 
 After applying the activation function \( f(\mathbf{Z}) \), we get the activation output:
 
-\[
+```math
     \mathbf{A} = f(\mathbf{Z})
-\]
+```
 
 ## 4. **Loss Function**
 
@@ -78,15 +78,15 @@ The loss function quantifies the difference between the predicted output and the
 
 - **Mean Squared Error (MSE)** (for regression):
 
-\[
+```math
     L = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}_i - y_i)^2
-\]
+```
 
 - **Cross-Entropy Loss** (for classification):
 
-\[
+```math
     L = -\frac{1}{m} \sum_{i=1}^{m} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
-\]
+```
 
 Where:
 - \( y_i \) = true label.
@@ -137,9 +137,9 @@ For each epoch:
 
 For each weight and bias, the gradients are computed using the chain rule:
 
-\[
+```math
     \frac{\partial L}{\partial w_i} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w_i}
-\]
+```
 
 Where:
 - \( \frac{\partial L}{\partial a} \) = derivative of the loss with respect to the activation.
@@ -155,3 +155,5 @@ Where:
 
 ---
 This markdown file provides a concise summary of the essential equations and steps involved in deep learning, including forward pass, loss computation, backpropagation, and a pseudocode representation of how weights are updated.
+
+To render mathematical equations properly, make sure to enable math rendering support (e.g., by using Markdown viewers with LaTeX support or extensions like `MathJax`).
