@@ -13,10 +13,11 @@ A neural network is composed of multiple neurons, where each neuron processes an
 ```
 
 Where:
-- `X` (\(\mathbf{X}\)) is a matrix of shape `n x m` where `n` is the number of features and `m` is the number of samples.
-- `W` (\(\mathbf{W}\)) is a matrix of shape `k x n` where `k` is the number of neurons and `n` is the number of input features.
-- `b` (\(\mathbf{b}\)) is a vector of shape `k x 1` where `k` corresponds to the number of neurons.
-- `Z` (\(\mathbf{Z}\)) is the output matrix of shape `k x m`, representing the result before the activation function is applied.
+- `X` (\(\mathbf{X}\)) is a matrix of shape *n* × *m* where *n* is the number of features and *m* is the number of samples.
+- `W` (\(\mathbf{W}\)) is a matrix of shape *k* × *n* where *k* is the number of neurons and *n* is the number of input features.
+- `b` (\(\mathbf{b}\)) is a vector of shape *k* × 1 where *k* corresponds to the number of neurons.
+- `Z` (\(\mathbf{Z}\)) is the output matrix of shape *k* × *m*, representing the result before the activation function is applied.
+
 
 After applying the activation function \(f(\mathbf{Z})\), we get the activation output \(\mathbf{A}\).
 
