@@ -1,2 +1,157 @@
-# DeepLearning
-Deep-Learning Projects
+# Deep Learning Mathematical Equations
+
+In this document, we will cover the fundamental mathematical equations that govern the forward pass, backward pass, and key components in deep learning, along with a diagram illustrating how weights, biases, and activation functions interact.
+
+## 1. **Forward Pass of a Neuron**
+
+A neural network is composed of multiple neurons, where each neuron processes an input using a weighted sum followed by an activation function.
+
+### Equation for a Single Neuron:
+
+\[
+    z = \sum_{i=1}^{n} w_i x_i + b
+\]
+
+Where:
+- \( x_i \) = input features.
+- \( w_i \) = weights associated with each input.
+- \( b \) = bias term.
+- \( z \) = weighted sum of inputs.
+
+The output of the neuron is passed through an **activation function** \( f(z) \):
+
+\[
+    a = f(z)
+\]
+
+### Example Activation Functions:
+1. **Sigmoid**: \( f(z) = \frac{1}{1 + e^{-z}} \)
+2. **ReLU**: \( f(z) = \max(0, z) \)
+3. **Tanh**: \( f(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} \)
+
+### **Diagram of a Neuron**:
+
+Below is a simple representation of how a neuron processes data:
+
+```
+          +---------------------+           
+Input 1 --|                     |           
+          |                     |           
+Input 2 --|    Weights (w_i)     |           
+          |                     | -- Weighted sum (z) -- Activation -- Output (a)
+  Bias -- |                     |           
+          +---------------------+           
+```
+
+## 2. **Why Activation Functions are Needed**
+
+Activation functions introduce non-linearity into the model, enabling the neural network to learn complex patterns. Without activation functions, the entire neural network would behave like a linear model regardless of the number of layers.
+
+### Key Reasons for Using Activation Functions:
+1. **Non-Linearity**: Enables the model to capture non-linear relationships in the data.
+2. **Differentiability**: Activation functions are generally differentiable, which is essential for backpropagation.
+3. **Preventing Collapsing Outputs**: Activation functions such as ReLU prevent collapsing all outputs to the same value by introducing sparsity (setting some neuron outputs to zero).
+
+## 3. **Forward Pass for an Entire Layer**
+
+For a layer of neurons, the forward pass equation is expressed as:
+
+\[
+    \mathbf{Z} = \mathbf{W} \mathbf{X} + \mathbf{b}
+\]
+
+Where:
+- \( \mathbf{X} \in \mathbb{R}^{n \times m} \) = input matrix (\( n \) features, \( m \) samples).
+- \( \mathbf{W} \in \mathbb{R}^{k \times n} \) = weight matrix (\( k \) neurons, \( n \) input features).
+- \( \mathbf{b} \in \mathbb{R}^{k \times 1} \) = bias vector.
+- \( \mathbf{Z} \in \mathbb{R}^{k \times m} \) = output matrix before activation.
+
+After applying the activation function \( f(\mathbf{Z}) \), we get the activation output:
+
+\[
+    \mathbf{A} = f(\mathbf{Z})
+\]
+
+## 4. **Loss Function**
+
+The loss function quantifies the difference between the predicted output and the true output. Common loss functions include:
+
+- **Mean Squared Error (MSE)** (for regression):
+
+\[
+    L = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}_i - y_i)^2
+\]
+
+- **Cross-Entropy Loss** (for classification):
+
+\[
+    L = -\frac{1}{m} \sum_{i=1}^{m} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
+\]
+
+Where:
+- \( y_i \) = true label.
+- \( \hat{y}_i \) = predicted label.
+
+## 5. **Pseudocode for Forward and Backward Pass**
+
+Below is a pseudocode representation of how weights are updated during the forward and backward pass using gradient descent:
+
+### **Pseudocode:**
+
+```
+Initialize weights W, biases b
+Learning rate eta
+
+For each epoch:
+    For each batch of training data (X, Y):
+        # Forward Pass
+        Z = W * X + b  # Linear combination of inputs and weights
+        A = activation_function(Z)  # Apply activation function
+
+        # Compute Loss
+        Loss = loss_function(A, Y)  # Compute loss between predictions and true labels
+
+        # Backward Pass
+        dLoss/dA = derivative_of_loss(A, Y)  # Derivative of loss w.r.t. activation output
+        dA/dZ = derivative_of_activation(Z)  # Derivative of activation function
+        dLoss/dZ = dLoss/dA * dA/dZ  # Chain rule to compute derivative of loss w.r.t. Z
+
+        dLoss/dW = dLoss/dZ * X.T  # Derivative of loss w.r.t. weights
+        dLoss/db = sum(dLoss/dZ)  # Derivative of loss w.r.t. biases
+
+        # Update weights and biases
+        W = W - eta * dLoss/dW
+        b = b - eta * dLoss/db
+
+    Print epoch loss
+```
+
+## 6. **Explanation of Pseudocode Steps:**
+1. **Initialization:** Start with random weights \( W \) and biases \( b \).
+2. **Forward Pass:** Compute the weighted sum of inputs and pass it through the activation function.
+3. **Loss Computation:** Calculate the loss to measure the performance of the model.
+4. **Backward Pass:** Use the chain rule to compute gradients for weights and biases.
+5. **Weight Update:** Update the weights and biases using the computed gradients and learning rate.
+
+## 7. **Gradient Computation**
+
+For each weight and bias, the gradients are computed using the chain rule:
+
+\[
+    \frac{\partial L}{\partial w_i} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w_i}
+\]
+
+Where:
+- \( \frac{\partial L}{\partial a} \) = derivative of the loss with respect to the activation.
+- \( \frac{\partial a}{\partial z} \) = derivative of the activation with respect to the weighted sum.
+- \( \frac{\partial z}{\partial w_i} \) = derivative of the weighted sum with respect to the weights.
+
+## 8. **Example Backpropagation Steps**
+
+1. Compute the loss \( L \).
+2. Compute \( \frac{\partial L}{\partial a} \) for the output layer.
+3. Propagate the gradients backward through the network.
+4. Update the weights and biases using the computed gradients.
+
+---
+This markdown file provides a concise summary of the essential equations and steps involved in deep learning, including forward pass, loss computation, backpropagation, and a pseudocode representation of how weights are updated.
