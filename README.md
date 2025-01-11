@@ -103,6 +103,3 @@ Where:
 4. Update the weights and biases using the computed gradients.
 
 ---
-This markdown file provides a concise summary of the essential equations and steps involved in deep learning, including forward pass, loss computation, backpropagation, and a pseudocode representation of how weights are updated.
-
-To render mathematical equations properly, make sure to enable math rendering support (e.g., by using Markdown viewers with LaTeX support or extensions like `MathJax`).
