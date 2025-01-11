@@ -13,66 +13,14 @@ A neural network is composed of multiple neurons, where each neuron processes an
 ```
 
 Where:
-- \( x_i \) = input features.
-- \( w_i \) = weights associated with each input.
-- \( b \) = bias term.
-- \( z \) = weighted sum of inputs.
+- `X` (\(\mathbf{X}\)) is a matrix of shape `n x m` where `n` is the number of features and `m` is the number of samples.
+- `W` (\(\mathbf{W}\)) is a matrix of shape `k x n` where `k` is the number of neurons and `n` is the number of input features.
+- `b` (\(\mathbf{b}\)) is a vector of shape `k x 1` where `k` corresponds to the number of neurons.
+- `Z` (\(\mathbf{Z}\)) is the output matrix of shape `k x m`, representing the result before the activation function is applied.
 
-The output of the neuron is passed through an **activation function** \( f(z) \):
+After applying the activation function \(f(\mathbf{Z})\), we get the activation output \(\mathbf{A}\).
 
-```math
-    a = f(z)
-```
-
-### Example Activation Functions:
-1. **Sigmoid**: \( f(z) = \frac{1}{1 + e^{-z}} \)
-2. **ReLU**: \( f(z) = \max(0, z) \)
-3. **Tanh**: \( f(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} \)
-
-### **Diagram of a Neuron**:
-
-Below is a simple representation of how a neuron processes data:
-
-```
-          +---------------------+           
-Input 1 --|                     |           
-          |                     |           
-Input 2 --|    Weights (w_i)     |           
-          |                     | -- Weighted sum (z) -- Activation -- Output (a)
-  Bias -- |                     |           
-          +---------------------+           
-```
-
-## 2. **Why Activation Functions are Needed**
-
-Activation functions introduce non-linearity into the model, enabling the neural network to learn complex patterns. Without activation functions, the entire neural network would behave like a linear model regardless of the number of layers.
-
-### Key Reasons for Using Activation Functions:
-1. **Non-Linearity**: Enables the model to capture non-linear relationships in the data.
-2. **Differentiability**: Activation functions are generally differentiable, which is essential for backpropagation.
-3. **Preventing Collapsing Outputs**: Activation functions such as ReLU prevent collapsing all outputs to the same value by introducing sparsity (setting some neuron outputs to zero).
-
-## 3. **Forward Pass for an Entire Layer**
-
-For a layer of neurons, the forward pass equation is expressed as:
-
-```math
-    \mathbf{Z} = \mathbf{W} \mathbf{X} + \mathbf{b}
-```
-
-Where:
-- \( \mathbf{X} \in \mathbb{R}^{n \times m} \) = input matrix (\( n \) features, \( m \) samples).
-- \( \mathbf{W} \in \mathbb{R}^{k \times n} \) = weight matrix (\( k \) neurons, \( n \) input features).
-- \( \mathbf{b} \in \mathbb{R}^{k \times 1} \) = bias vector.
-- \( \mathbf{Z} \in \mathbb{R}^{k \times m} \) = output matrix before activation.
-
-After applying the activation function \( f(\mathbf{Z}) \), we get the activation output:
-
-```math
-    \mathbf{A} = f(\mathbf{Z})
-```
-
-## 4. **Loss Function**
+## 4. **Loss Function**. **Loss Function**
 
 The loss function quantifies the difference between the predicted output and the true output. Common loss functions include:
 
